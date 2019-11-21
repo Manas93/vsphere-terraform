@@ -1,11 +1,15 @@
 provider "vsphere" {
-  user           = "cmpqa.svc@itomcmp.servicenow.com"
-  password       = "snc!23$"
-  vsphere_server = "10.198.1.13"
+  user           = "${var.user}"
+  password       = "${var.pass}"
+  vsphere_server = "${var.vsphereServer}"
 
   # If you have a self-signed cert
   allow_unverified_ssl = true
 }
+
+variable "user" {}
+variable "pass" {}
+variable "vsphereServer" {}
 
 data "vsphere_datacenter" "dc" {
   name = "devcloud"
