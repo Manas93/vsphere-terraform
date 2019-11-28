@@ -2,6 +2,18 @@ variable "datastore" {
  type = "string"
 }
 
+variable "memory" {
+   default = 4096
+}
+
+variable "num_cpus" {
+  default = 2
+}
+
+variable "domain" {
+  default = "test.internal"
+}
+
 variable "vmname" {
  type = "string"
 }
@@ -26,7 +38,6 @@ variable "ipv4_address" {
   default = "10.198.4.157"
 }
 variable "ipv4_netmask" {
-  type = "string"
   default = 24
 }
 variable "ipv4_gateway" {
@@ -37,8 +48,6 @@ variable "dns_server_list" {
   type = "list"
   default = ["10.198.4.10"]
 }
-
-
 variable "user" {
     type = "string"
 }
@@ -51,4 +60,3 @@ variable "host" {
 variable "region" {
     type = "string"
 }
-
