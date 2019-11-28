@@ -6,8 +6,6 @@ provider "vsphere" {
   # If you have a self-signed cert
   allow_unverified_ssl = true
 }
-
-
 #### RETRIEVE DATA INFORMATION ON VCENTER ####
 data "vsphere_datacenter" "dc" {
   name = "${var.region}"
@@ -35,8 +33,8 @@ data "vsphere_virtual_machine" "template" {
 # Set vm parameters
 resource "vsphere_virtual_machine" "vm-one" {
   name                 = "${var.vmname}"
-  num_cpus             = 2
-  memory               = 4096
+  num_cpus             = "${var.num_cpus}"
+  memory               = "${var.memory}"
   datastore_id         = "${data.vsphere_datastore.datastore.id}"
   #host_system_id       = "${data.vsphere_host.host.id}"
   resource_pool_id     = "${data.vsphere_resource_pool.pool.id}"
@@ -57,14 +55,14 @@ resource "vsphere_virtual_machine" "vm-one" {
     customize {
       linux_options {
         host_name = "${var.hostname}"
-        domain    = "test.internal"
+        domain    = "${var.domain}"
       }
       network_interface {
-        ipv4_address    = "${var.ipv4_address}" 
+        ipv4_address    = "${var.ipv4_address}"
         ipv4_netmask    = "${var.ipv4_netmask}"
         dns_server_list = "${var.dns_server_list}"
       }
       ipv4_gateway = "${var.ipv4_gateway}"
     }
-  } 
+  }
 }
